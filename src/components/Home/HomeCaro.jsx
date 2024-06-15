@@ -7,21 +7,17 @@ import "swiper/css/pagination";
 
 // import required modules
 import { Autoplay, FreeMode,} from "swiper/modules";
-import { useEffect, useState } from "react";
+
+import useSliderData from "../Hook/useSliderData";
 
 
 
 const HomeCaro = () => {
 
-    const [data, setData] = useState([])
-    useEffect(()=>{
-        fetch("fake.json")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            setData(data)
-        })
-    },[])
+   
+    const [sliderData, isLoading] = useSliderData()
+   
+    console.log(sliderData,"dliderrfved")
   return (
     <div className="w-full md:w-[95%] lg:w-[95%] m-auto mt-10">
       <Swiper
@@ -49,7 +45,7 @@ const HomeCaro = () => {
       >
 
         {
-            data?.slice(1,6).map(d => <SwiperSlide key={d?.description} className="">
+            sliderData?.slice(1,6).map(d => <SwiperSlide key={d?.description} className="">
                 <div className="card">
                   <div className="image">
                     <img className="h-[240px] md:h-[240px] lg:h-[430px] w-full" src={d?.image} alt="" />
@@ -59,7 +55,7 @@ const HomeCaro = () => {
                 </div>
               </SwiperSlide>)
         }
-
+ 
         
       </Swiper>
     </div>
