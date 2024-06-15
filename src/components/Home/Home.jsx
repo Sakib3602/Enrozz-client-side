@@ -4,10 +4,12 @@ import Bigimg from "./Bigimg";
 import HomeCaro from "./HomeCaro";
 
 
+
 const Home = () => {
     return (
         <div>
             <Hero></Hero>
+           
             <GridSection></GridSection>
             <Bigimg></Bigimg>
             <HomeCaro></HomeCaro>

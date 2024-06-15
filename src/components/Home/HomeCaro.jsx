@@ -9,6 +9,8 @@ import "swiper/css/pagination";
 import { Autoplay, FreeMode,} from "swiper/modules";
 
 import useSliderData from "../Hook/useSliderData";
+import Loader from "../Loader/Loader";
+import { Link } from "react-router-dom";
 
 
 
@@ -17,7 +19,10 @@ const HomeCaro = () => {
    
     const [sliderData, isLoading] = useSliderData()
    
-    console.log(sliderData,"dliderrfved")
+
+    if(isLoading){
+      return <Loader></Loader>
+    }
   return (
     <div className="w-full md:w-[95%] lg:w-[95%] m-auto mt-10">
       <Swiper
@@ -45,19 +50,24 @@ const HomeCaro = () => {
       >
 
         {
-            sliderData?.slice(1,6).map(d => <SwiperSlide key={d?.description} className="">
-                <div className="card">
-                  <div className="image">
-                    <img className="h-[240px] md:h-[240px] lg:h-[430px] w-full" src={d?.image} alt="" />
-                  </div>
-                  <span className="title">{d?.title}</span>
-                  <span className="price">${d?.price}</span>
+            sliderData?.slice(1,8).map(d =>  <SwiperSlide  key={d?._id}  className="">
+              <Link to={`/caroDetail/${d?._id}`} >
+              <div className="card">
+                <div className="image">
+                  <img className="h-[240px] md:h-[240px] lg:h-[430px] w-full" src={d?.image} alt="" />
                 </div>
-              </SwiperSlide>)
+                <span className="title">{d?.title}</span>
+                <span className="price">${d?.price}</span>
+              </div>
+              </Link>
+            </SwiperSlide> )
         }
  
         
       </Swiper>
+      <div>
+      
+      </div>
     </div>
   );
 };

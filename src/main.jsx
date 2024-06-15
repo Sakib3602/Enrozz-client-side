@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "../Root";
 import Home from "./components/Home/Home";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import CaroDetailPage from "./components/Home/CaroDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "caroDetail/:id",
+        element: <CaroDetailPage></CaroDetailPage>,
       },
     ],
   },

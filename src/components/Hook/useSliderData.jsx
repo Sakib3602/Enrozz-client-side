@@ -5,7 +5,7 @@ import useAxiosPublic from "./useAxiosPublic";
 
 const useSliderData = () => {
     const axiosPublic = useAxiosPublic()
-    const {data, isLoading} = useQuery({
+    const {data: sliderData, isLoading} = useQuery({
         queryKey: ["sliderData"],
         queryFn: async()=>{
             const res = await axiosPublic.get("/slider")
@@ -13,7 +13,7 @@ const useSliderData = () => {
         }
 
     })
-    return [data, isLoading]
+    return [sliderData, isLoading]
 };
 
 export default useSliderData;
