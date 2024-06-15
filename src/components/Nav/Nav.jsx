@@ -68,18 +68,18 @@ const Nav = () => {
           <div className="navbar-end flex-1">
             <div className=" hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
-                <li>
+                <Link to={"/"}><li>
                   <a>Home</a>
-                </li>
+                </li></Link>
                 <li className="z-10 ">
-                  <details>
+                  <details className="">
                     <summary>Categoties</summary>
-                    <ul className="p-2">
+                    <ul className="p-2 w-[200px]">
                       <li>
-                        <a>Submenu 1</a>
+                        <a>Man</a>
                       </li>
                       <li>
-                        <a>Submenu 2</a>
+                        <a>Women</a>
                       </li>
                     </ul>
                   </details>
@@ -87,6 +87,9 @@ const Nav = () => {
                 <li>
                   <a>Contact</a>
                 </li>
+                <Link to={'JoinUs'}><li>
+                  <a>Join Us</a>
+                </li></Link>
                 <li>
                   <Badge badgeContent={5} className="border  border-solid boder-[2px] border-[#3E0A30]" color="primary">
                     <ShoppingCartIcon color="action" />
