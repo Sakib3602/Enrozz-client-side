@@ -2,13 +2,14 @@ import { Badge } from "@mui/material";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+
 const Nav = () => {
   return (
     <>
       <div className="border text-center mb-1 text-white font-[600] py-2 bg-[#3E0A30]">
-        <h1>50% Flash off</h1>
+        <h1 className="animate-bounce">FLAT 60% DISCOUNT ON EVERYTHING !!</h1>
       </div>
-      <div className="h-[120px] bg-[#FFFFFF] px-6 shadow-md border ">
+      <div className="h-[110px] bg-[#FFFFFF] px-6 shadow-md  ">
         <div className="navbar mt-6  bg-base-100">
           <div className="navbar-start">
             <div className="dropdown">
@@ -34,7 +35,7 @@ const Nav = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-sm z-10 dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
                   <a>Item 1</a>
@@ -70,7 +71,7 @@ const Nav = () => {
                 <li>
                   <a>Home</a>
                 </li>
-                <li>
+                <li className="z-10 ">
                   <details>
                     <summary>Categoties</summary>
                     <ul className="p-2">
