@@ -7,7 +7,7 @@ const ThumSlider = ({data}) => {
  
         return (
             <Carousel>
-                <div className="md:p-10 lg:p-10">
+                <div className="">
                     <img className=" w-full" src={data?.image} />
                     
                 </div>
