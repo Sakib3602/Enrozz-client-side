@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hook/useAxiosPublic";
+import Loader from "../Loader/Loader";
 const Products = () => {
   const params = useParams();
   console.log(params);
@@ -9,7 +10,7 @@ const Products = () => {
   const axiosPublic = useAxiosPublic()
 
 
-  const {data : products = []} = useQuery({
+  const {data : products = [],isLoading} = useQuery({
       queryKey: ["products"],
       queryFn: async()=>{
           const res = await axiosPublic.get("/products")
@@ -50,10 +51,20 @@ const Products = () => {
           </svg>
         </label>
       </div>
+      {
+            isLoading && <Loader></Loader>
+        }
+        <div className="mt-10 w-[95%] md:w-[50%] lg:w-[40%] m-auto">
+            <h1 className="uppercase text-[50px]  font-[700] text-center"><span className="line-through">{params?.category}</span> <span className="line-through"> PRoducts</span></h1>
+            <p className="text-center">Discover our diverse range of innovative products designed to enhance everyday life with quality, style, and functionality. Explore now!</p>
+        </div>
       <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-[90%] md:w-[95%] lg:w-[80%] m-auto gap-10">
+
+
+       
     
     {
-        finalData?.map((p)=> <ProductCard key={p?._id}></ProductCard>)
+        finalData?.map((p)=> <ProductCard p={p} key={p?._id}></ProductCard>)
     }
         
       </div>
