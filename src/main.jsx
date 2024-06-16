@@ -10,6 +10,7 @@ import CaroDetailPage from "./components/Home/CaroDetailPage";
 import JoinUs from "./components/Authentication/JoinUs";
 import Registration from "./components/Authentication/Registration";
 import AuthProvider from "./components/Authentication/AuthProvider";
+import Products from "./components/Products/Products";
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/registation",
         element: <Registration></Registration>,
+      },
+      {
+        path: "/products/:category",
+        element: <Products></Products>
       },
     ],
   },
