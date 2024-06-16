@@ -11,7 +11,7 @@ const ProductCard = ({p}) => {
 
 
     return (
-        <div className="relative  group cursor-pointer overflow-hidden duration-500 w-[340px]  h-[520px] bg-black rounded-xl shadow-xl text-gray-50 p-2">
+        <div  className="relative  group cursor-pointer overflow-hidden duration-500 w-[340px]  h-[520px] bg-black rounded-xl shadow-xl text-gray-50 p-2">
         <div className="">
             <div className=" w-full h-[460px] bg-blue-400 duration-500">
                 <img className="h-full w-full" src={p?.image} alt="" />

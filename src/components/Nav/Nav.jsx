@@ -74,9 +74,10 @@ const Nav = () => {
                 <li>
                   <a>Contact</a>
                 </li>
-                <li>
+               <Link to={"/cart"}>
+               <li>
                  <h3>Carts (0)</h3>
-                </li>
+                </li></Link>
 
                 {
                   person ? <button onClick={handleLogOut} className="group  flex items-center justify-start w-11 h-11 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1">
@@ -111,6 +112,8 @@ const Nav = () => {
             <div className=" hidden lg:flex">
               <ul className="menu menu-horizontal px-1">
                 <Link to={"/"}>
+
+
                   <li>
                     <a>Home</a>
                   </li>
@@ -119,12 +122,18 @@ const Nav = () => {
                   <details className="">
                     <summary>Categoties</summary>
                     <ul className="p-2 w-[200px]">
+                    <Link to={"/products/men"}>
                       <li>
                         <a>Man</a>
-                      </li>
+                      </li></Link>
+
+                      <Link to={"/products/women"}>
                       <li>
                         <a>Women</a>
-                      </li>
+                      </li></Link>
+                     
+                      
+                      
                     </ul>
                   </details>
                 </li>
@@ -150,6 +159,7 @@ const Nav = () => {
                 }
                 
 
+                <Link to={"/cart"}>
                 <li>
                   <Badge
                     badgeContent={5}
@@ -159,6 +169,8 @@ const Nav = () => {
                     <ShoppingCartIcon color="action" />
                   </Badge>
                 </li>
+                
+                </Link>
               </ul>
             </div>
           </div>

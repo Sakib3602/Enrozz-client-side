@@ -1,12 +1,87 @@
 import { FaStar } from "react-icons/fa";
 import ThumSlider from "../Home/ThumSlider/ThumSlider";
+import Loader from "../Loader/Loader";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Authentication/AuthProvider";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosPublic from "../Hook/useAxiosPublic";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+
+const AllDetails = ({ data, isLoading }) => {
+  const { person, } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic()
+  const navigate = useNavigate()
+  
+  
+
+  const handleCart = (e) => {
+    e.preventDefault();
+
+    if(!person){
+      navigate("/joinUs")
+      return toast.error('Please Login First')
+    }
+    const color = e.target.color.value;
+    const size = e.target.size.value;
+
+    const cartData = {
+      color,
+      size,
+      email: person.email,
+      title: data.title,
+      image: data.image,
+      price: data.price,
+    
+      
+
+    };
+    console.log(cartData, "fron");
+    mutationUp.mutate(cartData);
+  };
 
 
-const AllDetails = ({data}) => {
-    return (
-        <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 h-[50px]">
+  const mutationUp = useMutation({
+    mutationFn : async(cartData)=>{
+      const res = await axiosPublic.post('/carts', cartData)
+      return res.data
+
+    },
+    onSuccess: ()=>{
+      navigate("/cart")
+      toast.success('Added To Cart!')
+      
+
+    }
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
+  return (
+    <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-1 h-[50px]">
       <div className="p-3 md:p-10 lg:p-14">
         <ThumSlider data={data}></ThumSlider>
+        <Toaster
+  position="top-center"
+  reverseOrder={false}
+/>
       </div>
       <div className="p-3 md:p-10 lg:p-10 space-y-5">
         <h1 className="text-[50px] font-[700]">{data?.title}</h1>
@@ -72,7 +147,10 @@ const AllDetails = ({data}) => {
         </div>
 
         <h1 className="text-[28px]">
-          Category : <span className="text-orange-500">{data?.category}</span>
+          Category :{" "}
+          <span className="text-orange-500 uppercase">
+            {data?.category} Cloth
+          </span>
         </h1>
 
         <h1>
@@ -80,120 +158,90 @@ const AllDetails = ({data}) => {
           are Available.
         </h1>
 
-        <div>
-          <h1 className="text-[16px] mb-2">Chosse Color :</h1>
-          <select className="select select-ghost w-full h-[60px] shadow-2xl">
-            <option disabled selected>
-              Pick Your Color
-            </option>
-            <option value={"Red"}>Red</option>
-            <option value={"Black"}>Black</option>
-            <option value={"Green"}>Green</option>
-          </select>
-        </div>
-        {/*  */}
-        <div>
-          <h1 className="text-[16px] mb-2">Chosse Size :</h1>
-          <select className="select select-ghost w-full h-[60px] shadow-2xl">
-            <option disabled selected>
-              Your Size
-            </option>
-            {data?.size?.map((s, i) => (
-              <option key={i} value={s}>
-                {s}
+        <form onSubmit={handleCart}>
+          <div>
+            <h1 className="text-[16px] mb-2">Choose Color :</h1>
+            <select
+              name="color"
+              className="select select-ghost w-full h-[60px] shadow-2xl"
+            >
+              <option disabled selected>
+                Pick Your Color
               </option>
-            ))}
-          </select>
-        </div>
+              <option value="Red">Red</option>
+              <option value="Black">Black</option>
+              <option value="Green">Green</option>
+            </select>
+          </div>
 
-        {/*  */}
-        <div>
-          <h1 className="hidden lg:flex  md:hidden space-x-5">
-            Tags :{" "}
-            {data?.tags?.map((t) => (
-              <div key={data?._id} className="badge badge-success gap-2 p-3">
-                
-                {t}
+          <div>
+            <h1 className="text-[16px] mb-2">Choose Size :</h1>
+            <select
+              name="size"
+              className="select select-ghost w-full h-[60px] shadow-2xl"
+            >
+              <option disabled selected>
+                Your Size
+              </option>
+              {data?.size?.map((s, i) => (
+                <option key={i} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <h1 className="hidden mt-5 lg:flex md:hidden space-x-5">
+              Tags :{" "}
+              {data?.tags?.map((t) => (
+                <div key={t} className="badge badge-success gap-2 p-3">
+                  {t}
+                </div>
+              ))}
+            </h1>
+          </div>
+          <div className="flex flex-col md:flex-row lg:flex-row items-center mt-8 space-y-5 lg:space-y-0 md:space-y-0 md:space-x-4 lg:space-x-4">
+
+
+          <input
+              type="submit"
+              className="w-[150px] bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]"
+              value="Add To Cart"
+            />
+            
+            <button
+              type="button"
+              className="bg-white border border-[#4ADE80] text-center w-48 rounded-2xl h-14 relative font-sans text-black text-xl font-semibold group"
+            >
+              <div className="bg-green-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
+                <svg
+                  width="25px"
+                  height="25px"
+                  viewBox="0 0 1024 1024"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fill="#000000"
+                    d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+                  />
+                  <path
+                    fill="#000000"
+                    d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+                  />
+                </svg>
               </div>
-            ))}
-          </h1>
-        </div>
-
-        {/*  */}
-        <a
-  href="#_"
-  className="w-full mt-5 h-[60px] relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
->
-  <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple-500 group-hover:translate-x-0 ease">
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-    </svg>
-  </span>
-  <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
-    ADD TO CART
-  </span>
-  <span className="relative invisible">Button Text</span>
-</a>
+              <p className="translate-x-2">Buy Now</p>
+            </button>
+          </div>
+        </form>
 
         {/*  */}
         {/*  */}
-        <a
-  href="#_"
-  className=" w-full h-[90px] relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-indigo-600 transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-blue-50 group"
->
-  <span className="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-indigo-600 group-hover:h-full" />
-  <span className="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-    <svg
-      className="w-5 h-5 text-green-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-    </svg>
-  </span>
-  <span className="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-    <svg
-      className="w-10 h-10 text-green-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M14 5l7 7m0 0l-7 7m7-7H3"
-      />
-    </svg>
-  </span>
-  <span className="relative w-full text-center text-[22px] transition-colors duration-200 ease-in-out group-hover:text-white">
-    Buy Now
-  </span>
-</a>
 
         {/*  */}
       </div>
     </div>
-    );
+  );
 };
 
 export default AllDetails;

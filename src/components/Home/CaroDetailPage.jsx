@@ -7,7 +7,7 @@ import AllDetails from "../AllDetails/AllDetails";
 const CaroDetailPage = () => {
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
-  const { data } = useQuery({
+  const { data , isLoading} = useQuery({
     queryKey: ["caro"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/slider/${id}`);
@@ -17,7 +17,7 @@ const CaroDetailPage = () => {
   console.log(data);
 
   return <>
-<AllDetails data={data}></AllDetails>
+<AllDetails data={data} isLoading={isLoading}></AllDetails>
 
   </>
 };

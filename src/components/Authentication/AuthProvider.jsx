@@ -16,6 +16,7 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [person, setPerson] = useState("");
+  const [forCart,setForCart] = useState(false)
   // create user singup
   const SingEmailPass = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -66,6 +67,8 @@ const AuthProvider = ({ children }) => {
     person,
     updateUserData,
     google,
+    setForCart,
+    forCart,
   };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };

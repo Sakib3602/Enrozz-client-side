@@ -11,6 +11,8 @@ import JoinUs from "./components/Authentication/JoinUs";
 import Registration from "./components/Authentication/Registration";
 import AuthProvider from "./components/Authentication/AuthProvider";
 import Products from "./components/Products/Products";
+import ProductsDetails from "./components/Products/ProductsDetails";
+import Cart from "./components/Cart/Cart";
 
 
 const router = createBrowserRouter([
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/products/:category",
         element: <Products></Products>
+      },
+      {
+        path: "/productsDetails/:id",
+        element: <ProductsDetails></ProductsDetails>
+      },
+      {
+        path: "/cart",
+        element: <Cart></Cart>
       },
     ],
   },
