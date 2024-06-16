@@ -4,9 +4,13 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
 
 export const AuthContext = createContext(null);
 
@@ -32,6 +36,12 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // google
+
+  const google = ()=>{
+    return signInWithPopup(auth, provider)
+  }
+
   //   on Auth s
   useEffect(() => {
     const DeleteIt = onAuthStateChanged(auth, (user) => {
@@ -55,6 +65,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     person,
     updateUserData,
+    google,
   };
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;
 };

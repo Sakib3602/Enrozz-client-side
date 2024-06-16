@@ -53,7 +53,7 @@ const Registration = () => {
       };
     
       // handle google
-     
+
       // post user data to db
     
       const userData = async(userPostDataForDb)=>{
