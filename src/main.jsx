@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import CaroDetailPage from "./components/Home/CaroDetailPage";
 import JoinUs from "./components/Authentication/JoinUs";
 import Registration from "./components/Authentication/Registration";
+import AuthProvider from "./components/Authentication/AuthProvider";
+
 
 const router = createBrowserRouter([
   {
@@ -25,11 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/joinUs",
-        element: <JoinUs></JoinUs>
+        element: <JoinUs></JoinUs>,
       },
       {
         path: "/registation",
-        element: <Registration></Registration>
+        element: <Registration></Registration>,
       },
     ],
   },
@@ -40,8 +42,10 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {" "}
-      <RouterProvider router={router} />{" "}
+      <AuthProvider>
+        
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

@@ -1,7 +1,15 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "./AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosPublic from "../Hook/useAxiosPublic";
 
 const Registration = () => {
+    const {SingEmailPass,logOut,updateUserData} = useContext(AuthContext)
+    const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
     // 
     const {
         register,
@@ -9,23 +17,65 @@ const Registration = () => {
         formState: { errors },
       } = useForm()
     
-      const onSubmit = (data) => {
-        const userDetails = {
-            email: data.email,
-            password:  data.password,
-            name: data.name,
-            image: data.image,
-        
-          
-        }
-
-        console.log(userDetails);
+      const onSubmit = async (data) => {
+        console.log(data.email, data.password, data.name, data.image);
+       
+    
+        SingEmailPass(data.email, data.password)
+          .then((result) => {
+            console.log(result, "from reg");
+            // toast.success("Registration Successfully Done!");
+            updateUserData(data.name,data.image)
+            .then(()=>{
+              logOut()
+              .then(() => {
+                
+    
+    
+                const userPostDataForDb = {
+                  name : data.name,
+                  email : data.email,
+                  image : data.image,
+                  role: "guest",
+                  
+    
+    
+                }
+                mutationUp.mutate(userPostDataForDb);
+    
+    
+              });
+    
+            })
+            
+          })
+          .catch();
+      };
+    
+      // handle google
+     
+      // post user data to db
+    
+      const userData = async(userPostDataForDb)=>{
+        const res = await axiosPublic.post('/userData', userPostDataForDb)
+        return res.data
+    
       }
+    
+      const mutationUp = useMutation({
+        mutationFn: userData,
+        onSuccess : ()=>{
+          toast.success("Registration Successfully Done!");
+          navigate("/joinUS");
+        }
+      })
+    
     // 
   return (
     <div>
       <section>
         <div className="flex bg-white items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
+        <Toaster />
           <div className="xl:mx-auto xl:w-full shadow-xl p-4 xl:max-w-sm 2xl:max-w-md">
             <div className="mb-2 flex justify-center" />
             <h2 className="text-center text-3xl font-bold leading-tight text-black">
@@ -99,7 +149,7 @@ const Registration = () => {
                       placeholder="Password"
                       type="password"
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      {...register("password", { required: true, pattern: /^[A-Za-z]+$/i },)}
+                      {...register("password", { required: true })}
                       />
                       {errors.password && <span className="text-red-500">Not a Strong Password & requied filed</span>}
                   </div>

@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider";
+import toast, { Toaster } from "react-hot-toast";
 
 const JoinUs = () => {
+  const {signIn} = useContext(AuthContext)
+  const navigate = useNavigate()
+  // 
   const {
     register,
     handleSubmit,
@@ -9,20 +15,27 @@ const JoinUs = () => {
   } = useForm()
 
   const onSubmit = (data) => {
+   
     const userDetails = {
         email: data.email,
         password:  data.password,
-        name: data.name,
-        image: data.image,
+        
     
       
     }
+    signIn(data.email,data.password)
+    .then(()=>{
+      navigate("/")
+      toast.success('Log in Succesful !')
+    })
+    .then()
 
     console.log(userDetails);
   }
     return <>
   <div>
       <section>
+      <Toaster />
         <div className="flex bg-white items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
           <div className="xl:mx-auto xl:w-full shadow-xl p-4 xl:max-w-sm 2xl:max-w-md">
             <div className="mb-2 flex justify-center" />
@@ -71,7 +84,7 @@ const JoinUs = () => {
                       placeholder="Password"
                       type="password"
                       className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      {...register("password", { required: true, pattern: /^[A-Za-z]+$/i },)}
+                      {...register("password", { required: true })}
                       />
                       {errors.password && <span className="text-red-500">Password Wrong</span>}
                   </div>
