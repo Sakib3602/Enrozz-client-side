@@ -19,7 +19,7 @@ const Products = () => {
 
   //   console.log(products)
 
-  const finalData = products?.filter((px) => px?.category === params?.category);
+  const finalData = products?.filter(px => px?.category === params?.category);
 
   console.log(finalData);
   return (

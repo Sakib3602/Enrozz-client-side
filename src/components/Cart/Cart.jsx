@@ -11,7 +11,7 @@ const Cart = () => {
     const {person} = useContext(AuthContext)
     const axiosPublic =useAxiosPublic()
 
-    const {data, isLoading} = useQuery({
+    const {data, isLoading,refetch} = useQuery({
         queryKey: ["cartTable"],
         queryFn: async()=>{
             const res = await axiosPublic.get(`/cartTable/${person?.email}`)
@@ -46,7 +46,7 @@ if(isLoading){
             <tbody>
               {/* row 1 */}
               {
-            data?.map(t =>  <Table key={t?._id} t={t}></Table>)
+            data?.map(t =>  <Table refetch={refetch}  key={t?._id} t={t}></Table>)
         }
               
               {/* row 2 */}
