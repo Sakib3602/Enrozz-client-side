@@ -13,6 +13,7 @@ import AuthProvider from "./components/Authentication/AuthProvider";
 import Products from "./components/Products/Products";
 import ProductsDetails from "./components/Products/ProductsDetails";
 import Cart from "./components/Cart/Cart";
+import PrivateRoute from "./components/Authentication/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -46,7 +47,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart></Cart>
+        element: <PrivateRoute>
+          <Cart></Cart>
+        </PrivateRoute>
       },
     ],
   },
