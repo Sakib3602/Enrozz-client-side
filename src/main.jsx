@@ -14,6 +14,7 @@ import Products from "./components/Products/Products";
 import ProductsDetails from "./components/Products/ProductsDetails";
 import Cart from "./components/Cart/Cart";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
+import DashBord from "./components/DashBord/DashBord";
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/dashbord",
+    element: <DashBord></DashBord>,
+  }
 ]);
 
 const queryClient = new QueryClient();

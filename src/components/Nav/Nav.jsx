@@ -86,6 +86,14 @@ const Nav = () => {
                 <li>
                   <a>Contact</a>
                 </li>
+                {
+                    person &&  <Link to={"/dashbord"}>
+                    <li>
+                  
+                  <a>Dashbord</a>
+                </li>
+                    </Link>
+                  }
                <Link to={"/cart"}>
                <li>
                  <h3>Carts (0)</h3>
@@ -152,6 +160,15 @@ const Nav = () => {
                 <li>
                   <a>Contact</a>
                 </li>
+                {
+                    person &&  <Link to={"/dashbord"}>
+                    <li>
+                  
+                  <a>Dashbord</a>
+                </li>
+                    </Link>
+                  }
+               
 
                 {
                   person ? <button onClick={handleLogOut} className="group  flex items-center justify-start w-11 h-11 bg-red-600 rounded-full cursor-pointer relative overflow-hidden transition-all duration-200 shadow-lg hover:w-32 hover:rounded-lg active:translate-x-1 active:translate-y-1">

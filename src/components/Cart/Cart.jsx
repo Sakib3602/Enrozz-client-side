@@ -4,30 +4,36 @@ import { AuthContext } from "../Authentication/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hook/useAxiosPublic";
 import Loader from "../Loader/Loader";
-import offer from "../../assets/60_-off-web.png"
+import offer from "../../assets/60_-off-web.png";
 import CartSlider from "./CartSlider";
 
 const Cart = () => {
-    const {person} = useContext(AuthContext)
-    const axiosPublic =useAxiosPublic()
+  const { person } = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
 
-    const {data, isLoading,refetch} = useQuery({
-        queryKey: ["cartTable"],
-        queryFn: async()=>{
-            const res = await axiosPublic.get(`/cartTable/${person?.email}`)
-            return res.data
-        }
-    })
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["cartTable"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/cartTable/${person?.email}`);
+      return res.data;
+    },
+  });
 
-    console.log(data,"tabel")
-    const [tax, setTex] = useState(20)
-    const [charge, setCharge] = useState(50)
-    const initialValue = tax + charge
-    
+  console.log(data, "tabel");
+ 
 
-if(isLoading){
-    return <Loader></Loader>
-}
+  const val = data?.reduce((accumulator, currentValue) => {
+    return parseInt(accumulator + currentValue?.price);
+  }, 0)
+
+  const valTotal = val + 50 +18
+
+
+ 
+  
+  if (isLoading) {
+    return <Loader></Loader>;
+  }
 
   return (
     <div className="w-[90%] mt-10 md:w-[90%] lg:w-[75%] gap-20 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
@@ -49,10 +55,23 @@ if(isLoading){
             </thead>
             <tbody>
               {/* row 1 */}
+              {/* {
+
+                
+data?.length > 0 &&
+  
+              data?.map((t) => (
+                <Table refetch={refetch} key={t?._id} t={t}></Table>
+              ))} */}
+
               {
-            data?.map(t =>  <Table refetch={refetch}  key={t?._id} t={t}></Table>)
-        }
-              
+                data?.length > 0 ?  data?.map((t) => (
+                  <Table refetch={refetch} key={t?._id} t={t}></Table>
+                )) : ""
+              }
+
+
+
               {/* row 2 */}
             </tbody>
             {/* foot */}
@@ -62,30 +81,31 @@ if(isLoading){
         <div className="divider"></div>
 
         <div className="flex justify-between px-8  text-[18px] font-[600] mb-5">
-            <h1>Tax</h1>
-            <h1>${data?.length >= 4 ? tax : 0} </h1>
+          <h1>Tax</h1>
+          <h1>$18 </h1>
         </div>
         <div className="flex justify-between px-8 text-[18px] font-[600] mb-5">
-            <h1>Shipping Charge</h1>
-            <h1>${data?.length  < 4 ? charge : 0}</h1>
+          <h1>Shipping Charge</h1>
+          <h1>$50</h1>
         </div>
         <div className="divider"></div>
 
         <div className="flex justify-between px-8 text-[18px] font-[600] mb-5">
-            <h1>Total Price</h1>
-            <h1>${data?.reduce((accumulator,currentValue)=>{
-              return parseInt(accumulator + currentValue?.price)
-            },initialValue)
-              }</h1>
+          <h1>Total Price</h1>
+          <h1>
+            ${valTotal}
+            {/* {data?.reduce((accumulator, currentValue) => {
+              return parseInt(accumulator + currentValue?.price);
+            }, 0)}  */}
+          </h1>
+         
         </div>
-        
-       
+
         {/* table */}
       </div>
       <div className=" min-h-[80vh]">
         <img className="w-full h-[350px]" src={offer} alt="" />
         <CartSlider></CartSlider>
-
       </div>
     </div>
   );
