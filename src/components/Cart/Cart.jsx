@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Table from "./Table";
 import { AuthContext } from "../Authentication/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
@@ -20,6 +20,10 @@ const Cart = () => {
     })
 
     console.log(data,"tabel")
+    const [tax, setTex] = useState(20)
+    const [charge, setCharge] = useState(50)
+    const initialValue = tax + charge
+    
 
 if(isLoading){
     return <Loader></Loader>
@@ -59,17 +63,20 @@ if(isLoading){
 
         <div className="flex justify-between px-8  text-[18px] font-[600] mb-5">
             <h1>Tax</h1>
-            <h1>$00</h1>
+            <h1>${data?.length >= 4 ? tax : 0} </h1>
         </div>
         <div className="flex justify-between px-8 text-[18px] font-[600] mb-5">
             <h1>Shipping Charge</h1>
-            <h1>$20</h1>
+            <h1>${data?.length  < 4 ? charge : 0}</h1>
         </div>
         <div className="divider"></div>
 
         <div className="flex justify-between px-8 text-[18px] font-[600] mb-5">
             <h1>Total Price</h1>
-            <h1>$2300</h1>
+            <h1>${data?.reduce((accumulator,currentValue)=>{
+              return parseInt(accumulator + currentValue?.price)
+            },initialValue)
+              }</h1>
         </div>
         
        

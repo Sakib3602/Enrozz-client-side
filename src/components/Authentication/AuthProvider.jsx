@@ -49,6 +49,9 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, provider)
   }
 
+  // 
+  
+
   //   on Auth s
   useEffect(() => {
     const DeleteIt = onAuthStateChanged(auth, (user) => {

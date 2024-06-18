@@ -4,9 +4,12 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useContext } from "react";
 import { AuthContext } from "../Authentication/AuthProvider";
 import toast, { Toaster } from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../Hook/useAxiosPublic";
 
 const Nav = () => {
   const { person , logOut} = useContext(AuthContext);
+  const axiosPublic = useAxiosPublic();
   console.log(person, "from nav");
 
   function handleLogOut(){
@@ -18,6 +21,15 @@ const Nav = () => {
     })
    
   }
+
+  const {data: cartlength = [],refetch} = useQuery({
+  queryKey : ["cartLength"],
+  queryFn: async () => {
+    const res = await axiosPublic.get(`/length/${person?.email || ""}`);
+    return res.data;
+  },
+  })
+  // console.log(cartlength.cartLength)
 
   return (
     <>
@@ -162,7 +174,7 @@ const Nav = () => {
                 <Link to={"/cart"}>
                 <li>
                   <Badge
-                    badgeContent={5}
+                    badgeContent={person ? cartlength?.cartLength : "0"  }
                     className="border ml-1  border-solid boder-[2px] border-[#3E0A30]"
                     color="primary"
                   >
