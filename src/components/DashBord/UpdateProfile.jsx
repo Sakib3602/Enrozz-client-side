@@ -1,7 +1,12 @@
 import { useForm } from "react-hook-form";
 import UserSingleData from "../Hook/UserSingleData";
 import useAxiosPublic from "../Hook/useAxiosPublic";
-import axios from "axios";
+
+import { useContext, } from "react";
+import { useMutation } from "@tanstack/react-query";
+import useAxiosSecure from "../Hook/useAxiosSecure";
+import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../Authentication/AuthProvider";
 
 
 
@@ -10,9 +15,12 @@ const imgbb_key = import.meta.env.VITE_IMGBB_KEY
 const imgbb_Api = `https://api.imgbb.com/1/upload?key=${imgbb_key}`
 
 const UpdateProfile = () => {
+  const {person} = useContext(AuthContext)
   const [userSingleData, isloading] = UserSingleData();
+
  
   const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
   const {
     register,
     handleSubmit,
@@ -31,9 +39,32 @@ const UpdateProfile = () => {
     })
 
     console.log(res.data.data.display_url)
+    if(res.data.status){
+      const dataUpdate = {
+        name : data?.name,
+        image : res?.data.data.display_url
+      }
+      mutationUp.mutate(dataUpdate)
+    }else{
+      toast.error("Something went wrong !")
+    }
+
+
 
 
   };
+
+  const mutationUp = useMutation({
+    mutationFn : async(dataUpdate)=>{
+      const res = await axiosSecure.patch(`/userDataUpdate/${person?.email}`,dataUpdate )
+      return res.data
+    },
+    
+    onSuccess : ()=>{
+      toast.success("Data Is Up To Date !")
+    }
+
+  })
   return (
     <div>
       <h1 className="text-[25px] py-5 uppercase  font-[500] text-center">
@@ -47,6 +78,7 @@ const UpdateProfile = () => {
     <h3 className="block font-sans text-3xl font-semibold leading-snug tracking-normal text-white antialiased uppercase">
       UpDate Now
     </h3>
+    <Toaster></Toaster>
   </div>
   <div className="flex flex-col gap-4 p-6">
     
@@ -79,6 +111,13 @@ const UpdateProfile = () => {
         {/*  */}
      
     </div>
+    {/*  */}
+    {/*  */}
+    {/* {
+      img !== "" ? <img src={img} className="w-[100px] h-[120px]" alt="" /> : ''
+    } */}
+    {/*  */}
+    {/*  */}
   </div>
   <div className="p-6 pt-0">
     <button
