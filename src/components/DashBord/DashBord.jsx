@@ -1,9 +1,15 @@
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { Link } from "react-router-dom";
-
+import { Link, Outlet } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
+import { IoPerson } from "react-icons/io5";
+import { GrUpdate } from "react-icons/gr";
 const DashBord = () => {
+
+
+  
   return (
-    <div>
+    <div className="w-[95%] md:w-[90%] lg:w-[80%] m-auto">
       {/* for sm and md device */}
 
       <div className="flex md:flex lg:hidden w-full h-[80px]  ">
@@ -48,6 +54,56 @@ const DashBord = () => {
       </div>
       
       {/* for sm and md device */}
+
+
+    {/* for lg screen only */}
+
+    <div className=" bg-[#F5F5F5] flex">
+        <div className="w-[35%] hidden md:hidden lg:block h-screen border bg-[#006666] rounded-br-2xl rounded-tr-2xl">
+            <h1 className="text-white font-[600] text-[43px] text-center mt-4">EnrozzZ</h1>
+            <hr className="bg-white w-[85%] m-auto mt-3" />
+
+            <div>
+                <ul className="text-white text-[20px] text-start ml-8 space-y-5 list-none">
+
+                <li  className="mt-10">
+                        <Link className="flex space-y-10 items-center" to={""}>
+                        <IoPerson className="mr-2"></IoPerson>
+                        My Profile</Link>
+                    </li>
+                <li  className="mt-10">
+                        <Link className="flex space-y-10 items-center" to={"updateUserProfile"}>
+                        <GrUpdate className="mr-2"></GrUpdate>
+                        UpDate Profile</Link>
+                    </li>
+                   
+                   
+
+                    <li  >
+                        <Link className="flex space-y-10 items-center" to={"/"}>
+                        <FaHome className="mr-2"></FaHome>
+                        Home</Link>
+                    </li>
+                    <li className="flex space-x-3">
+                    <Link className="flex space-y-10 items-center" to={"/cart"}>
+                        <FaShoppingCart className="mr-2"></FaShoppingCart>
+                        My Cart</Link>
+                    </li>
+                
+                </ul>
+            </div>
+
+        </div>
+
+         {/*  */}
+         <div className="w-full ">
+        <Outlet></Outlet>
+        </div>
+        {/*  */}
+
+       
+    </div>
+    {/* for lg screen only */}
     </div>
   );
 };

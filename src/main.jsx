@@ -15,6 +15,8 @@ import ProductsDetails from "./components/Products/ProductsDetails";
 import Cart from "./components/Cart/Cart";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 import DashBord from "./components/DashBord/DashBord";
+import UserProfile from "./components/DashBord/UserProfile.jsx/UserProfile";
+import UpdateProfile from "./components/DashBord/UpdateProfile";
 
 
 const router = createBrowserRouter([
@@ -55,8 +57,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashbord",
+    path: "dashbord",
     element: <DashBord></DashBord>,
+    children: [
+      {
+        index: true,
+        element : <UserProfile></UserProfile>
+      },
+      {
+        path: "updateUserProfile",
+        element : <UpdateProfile></UpdateProfile>
+      },
+    ]
   }
 ]);
 
