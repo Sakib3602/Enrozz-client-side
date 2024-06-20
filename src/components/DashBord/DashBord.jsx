@@ -61,7 +61,7 @@ const DashBord = () => {
     {/* for lg screen only */}
 
     <div className="  flex">
-        <div className="w-[35%] hidden md:hidden lg:block h-screen border bg-[#006666] ">
+        <div className="w-[35%] hidden md:hidden lg:block h-screen  bg-[#006666] ">
             <h1 className="text-white font-[600] text-[43px] text-center mt-4">EnrozzZ</h1>
             <hr className="bg-white w-[85%] m-auto mt-3" />
 
