@@ -18,6 +18,7 @@ import DashBord from "./components/DashBord/DashBord";
 import UserProfile from "./components/DashBord/UserProfile.jsx/UserProfile";
 import UpdateProfile from "./components/DashBord/UpdateProfile";
 import FullReview from "./components/DashBord/FullReview";
+import BuyForm from "./components/BuySection/BuyForm";
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,12 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <PrivateRoute>
           <Cart></Cart>
+        </PrivateRoute>
+      },
+      {
+        path: "/buyform",
+        element: <PrivateRoute>
+          <BuyForm></BuyForm>
         </PrivateRoute>
       },
     ],

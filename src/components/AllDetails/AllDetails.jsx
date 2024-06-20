@@ -6,7 +6,7 @@ import { AuthContext } from "../Authentication/AuthProvider";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosPublic from "../Hook/useAxiosPublic";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AllDetails = ({ data, isLoading }) => {
   const { person, } = useContext(AuthContext);
@@ -208,8 +208,9 @@ const AllDetails = ({ data, isLoading }) => {
               className="w-[150px] bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]"
               value="Add To Cart"
             />
-            
+            <Link to={"/buyform"}>
             <button
+
               type="button"
               className="bg-white border border-[#4ADE80] text-center w-48 rounded-2xl h-14 relative font-sans text-black text-xl font-semibold group"
             >
@@ -232,6 +233,9 @@ const AllDetails = ({ data, isLoading }) => {
               </div>
               <p className="translate-x-2">Buy Now</p>
             </button>
+            
+            </Link>
+            
           </div>
         </form>
 

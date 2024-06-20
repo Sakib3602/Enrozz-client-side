@@ -17,7 +17,7 @@ const Products = () => {
     queryKey: ["products", asc, search],
     queryFn: async () => {
       const res = await axiosPublic.get(
-        `/products?sort=${asc}&search=${search}`
+        `/products?sort=${!asc ? "asc" : "des"}&search=${search}`
       );
       return res.data;
     },
