@@ -3,52 +3,61 @@ import ProductCard from "./ProductCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hook/useAxiosPublic";
 import Loader from "../Loader/Loader";
+import { useState } from "react";
+import { IoSearch } from "react-icons/io5";
 const Products = () => {
   const params = useParams();
-  console.log(params);
+  // console.log(params);
+  const [asc, SetAsc] = useState(true);
+  const [search, setSearch] = useState("");
 
   const axiosPublic = useAxiosPublic();
 
   const { data: products = [], isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", asc, search],
     queryFn: async () => {
-      const res = await axiosPublic.get("/products");
+      const res = await axiosPublic.get(
+        `/products?sort=${asc}&search=${search}`
+      );
       return res.data;
     },
   });
 
-  //   console.log(products)
+  console.log(products);
 
-  const finalData = products?.filter(px => px?.category === params?.category);
+  function handleSearch(e) {
+    e.preventDefault();
 
-  console.log(finalData);
+    console.log(e.target.sea.value)
+    setSearch(e.target.sea.value);
+  }
+
+  const finalData = products?.filter((px) => px?.category === params?.category);
+
   return (
     <>
       <div className="w-full min-h-[55px] flex space-x-2  md:space-x-4 lg:space-x-4 item-center p-2 md:px-8 lg:px-8 mt-2 shadow-xl bg-white ">
-        <select className="select select-bordered w-[80%]  md:w-[150px] lg:w-[150px] p-5">
-          <option disabled selected>
-            Sort By
-          </option>
-          <option>High to Low Price</option>
-          <option>Low to High Price</option>
-        </select>
-
-        <label className="input input-bordered flex items-center gap-2">
-          <input type="text" className="grow" placeholder="Search Now..." />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            fill="currentColor"
-            className="w-4 h-4 opacity-70"
+        <label>
+          <button
+            onClick={() => SetAsc(!asc)}
+            className="cursor-pointer uppercase bg-white px-4 py-2 active:translate-x-0.5 active:translate-y-0.5 hover:shadow-[0.5rem_0.5rem_#F44336,-0.5rem_-0.5rem_#00BCD4] transition border"
           >
-            <path
-              fillRule="evenodd"
-              d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-              clipRule="evenodd"
-            />
-          </svg>
+            {asc ? "High To Low Price" : "Low to High Price"}
+          </button>
         </label>
+
+
+        <div>
+          <form onSubmit={handleSearch}>
+            <input type="text " name="sea" className="grow h-[45px] border focus:border-pink-450 px-4" placeholder="Search Now..." />
+            <input type="submit"  className="h-[45px] rounded-bl-sm rounded-tr-sm w-[70px] bg-blue-950 text-white" value="Search" />
+          </form>
+        </div>
       </div>
+
+
+
+
       {isLoading && <Loader></Loader>}
       <div className="mt-10 w-[95%] md:w-[50%] lg:w-[40%] m-auto">
         <h1 className="uppercase text-[50px]  font-[700] text-center">

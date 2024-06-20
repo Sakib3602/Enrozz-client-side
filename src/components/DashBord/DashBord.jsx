@@ -4,12 +4,14 @@ import { FaHome } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoPerson } from "react-icons/io5";
 import { GrUpdate } from "react-icons/gr";
+import { MdOutlineRateReview } from "react-icons/md";
 const DashBord = () => {
 
 
   
   return (
-    <div className="w-[95%] md:w-[90%] lg:w-[80%] m-auto">
+    <div className="bg-[#F5F5F5]">
+      <div className="w-[95%] bg-[#F5F5F5] md:w-[90%]  m-auto">
       {/* for sm and md device */}
 
       <div className="flex md:flex lg:hidden w-full h-[80px]  ">
@@ -58,8 +60,8 @@ const DashBord = () => {
 
     {/* for lg screen only */}
 
-    <div className=" bg-[#F5F5F5] flex">
-        <div className="w-[35%] hidden md:hidden lg:block h-screen border bg-[#006666] rounded-br-2xl rounded-tr-2xl">
+    <div className="  flex">
+        <div className="w-[35%] hidden md:hidden lg:block h-screen border bg-[#006666] ">
             <h1 className="text-white font-[600] text-[43px] text-center mt-4">EnrozzZ</h1>
             <hr className="bg-white w-[85%] m-auto mt-3" />
 
@@ -76,8 +78,15 @@ const DashBord = () => {
                         <GrUpdate className="mr-2"></GrUpdate>
                         UpDate Profile</Link>
                     </li>
+                <li  className="mt-10">
+                        <Link className="flex space-y-10 items-center" to={"fullReview"}>
+                        <MdOutlineRateReview className="mr-2"></MdOutlineRateReview>
+                        Review Our Sevice</Link>
+                    </li>
                    
-                   
+                    <div className=" h-2 w-[90%] pt-1">
+                      <hr />
+                    </div>
 
                     <li  >
                         <Link className="flex space-y-10 items-center" to={"/"}>
@@ -104,6 +113,7 @@ const DashBord = () => {
        
     </div>
     {/* for lg screen only */}
+    </div>
     </div>
   );
 };

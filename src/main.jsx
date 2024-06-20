@@ -17,6 +17,7 @@ import PrivateRoute from "./components/Authentication/PrivateRoute";
 import DashBord from "./components/DashBord/DashBord";
 import UserProfile from "./components/DashBord/UserProfile.jsx/UserProfile";
 import UpdateProfile from "./components/DashBord/UpdateProfile";
+import FullReview from "./components/DashBord/FullReview";
 
 
 const router = createBrowserRouter([
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "updateUserProfile",
         element : <UpdateProfile></UpdateProfile>
+      },
+      {
+        path: "fullReview",
+        element : <FullReview></FullReview>
       },
     ]
   }
