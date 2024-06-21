@@ -19,7 +19,9 @@ import UserProfile from "./components/DashBord/UserProfile.jsx/UserProfile";
 import UpdateProfile from "./components/DashBord/UpdateProfile";
 import FullReview from "./components/DashBord/FullReview";
 import BuyForm from "./components/BuySection/BuyForm";
-
+import Succes from "./components/BuySection/Succes";
+import Fail from "./components/BuySection/Fail";
+import Cancel from "./components/BuySection/Cancel";
 
 const router = createBrowserRouter([
   {
@@ -44,23 +46,51 @@ const router = createBrowserRouter([
       },
       {
         path: "/products/:category",
-        element: <Products></Products>
+        element: <Products></Products>,
       },
       {
         path: "/productsDetails/:id",
-        element: <ProductsDetails></ProductsDetails>
+        element: <ProductsDetails></ProductsDetails>,
+      },
+      {
+        path: "/succes",
+        element: (
+          <PrivateRoute>
+            <Succes></Succes>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/fail",
+        element: (
+          <PrivateRoute>
+            <Fail></Fail>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/cancel",
+        element: (
+          <PrivateRoute>
+            <Cancel></Cancel>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/cart",
-        element: <PrivateRoute>
-          <Cart></Cart>
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Cart></Cart>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/buyform",
-        element: <PrivateRoute>
-          <BuyForm></BuyForm>
-        </PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <BuyForm></BuyForm>
+          </PrivateRoute>
+        ),
       },
     ],
   },
@@ -70,18 +100,18 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element : <UserProfile></UserProfile>
+        element: <UserProfile></UserProfile>,
       },
       {
         path: "updateUserProfile",
-        element : <UpdateProfile></UpdateProfile>
+        element: <UpdateProfile></UpdateProfile>,
       },
       {
         path: "fullReview",
-        element : <FullReview></FullReview>
+        element: <FullReview></FullReview>,
       },
-    ]
-  }
+    ],
+  },
 ]);
 
 const queryClient = new QueryClient();
@@ -90,7 +120,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        
         <RouterProvider router={router} />
       </AuthProvider>
     </QueryClientProvider>

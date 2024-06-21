@@ -6,7 +6,7 @@ import { useState } from "react";
 const BuyForm = () => {
 
     const axisSecure = useAxiosSecure()
-    const [u,setU] = useState("")
+ 
 
     const {
         register,
@@ -39,20 +39,20 @@ const BuyForm = () => {
       const mutationUp = useMutation({
         mutationFn : async(buyData)=>{
             const res = await axisSecure.post('/create-payment', buyData)
-            setU(res)
+            // setU(res)
             return res.data
           
         },
-        onSuccess : ()=>{
-            const redirectUrl = u.data.paymentUrl
+        onSuccess : (data)=>{
+            const redirectUrl = data.paymentUrl
 
             if(redirectUrl){
                 window.location.replace(redirectUrl)
-                setU('')
+                
             }
         }
       })
-      console.log(u,"uuuuuuuuuuu")
+     
 
 
 

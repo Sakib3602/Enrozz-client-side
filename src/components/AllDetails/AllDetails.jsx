@@ -208,7 +208,35 @@ const AllDetails = ({ data, isLoading }) => {
               className="w-[150px] bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]"
               value="Add To Cart"
             />
-            <Link to={"/buyform"}>
+
+            {
+              person ? <Link to={"/buyform"}>
+              <button
+  
+                type="button"
+                className="bg-white border border-[#4ADE80] text-center w-48 rounded-2xl h-14 relative font-sans text-black text-xl font-semibold group"
+              >
+                <div className="bg-green-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500">
+                  <svg
+                    width="25px"
+                    height="25px"
+                    viewBox="0 0 1024 1024"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill="#000000"
+                      d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
+                    />
+                    <path
+                      fill="#000000"
+                      d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
+                    />
+                  </svg>
+                </div>
+                <p className="translate-x-2">Buy Now</p>
+              </button>
+              
+              </Link> : <Link to={"/joinUs"}>
             <button
 
               type="button"
@@ -235,6 +263,8 @@ const AllDetails = ({ data, isLoading }) => {
             </button>
             
             </Link>
+            }
+           
             
           </div>
         </form>
