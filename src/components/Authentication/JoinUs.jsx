@@ -44,6 +44,7 @@ const JoinUs = () => {
       
       console.log(result.user,"result");
       mutationUp.mutate(userPostDataForDb);
+      navigate("/")
     });
   
   }
@@ -56,8 +57,9 @@ const JoinUs = () => {
   const mutationUp = useMutation({
     mutationFn: userData,
     onSuccess: () => {
-      toast.success("Registration Successfully Done!");
-      navigate("/joinUS");
+      toast.success("Log in Succesful !");
+
+      navigate("/");
     },
   });
   return (

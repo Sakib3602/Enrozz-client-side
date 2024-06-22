@@ -22,6 +22,8 @@ import BuyForm from "./components/BuySection/BuyForm";
 import Succes from "./components/BuySection/Succes";
 import Fail from "./components/BuySection/Fail";
 import Cancel from "./components/BuySection/Cancel";
+import AllUser from "./components/DashBord/Admin/AllUser";
+import SafeUrlAdmin from "./components/DashBord/Admin/SafeUrlAdmin";
 
 const router = createBrowserRouter([
   {
@@ -96,7 +98,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashbord",
-    element: <DashBord></DashBord>,
+    element: (
+      <PrivateRoute>
+        <DashBord></DashBord>
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -109,6 +115,15 @@ const router = createBrowserRouter([
       {
         path: "fullReview",
         element: <FullReview></FullReview>,
+      },
+      {
+        path: "alluser",
+        element: (
+          <SafeUrlAdmin>
+            
+            <AllUser></AllUser>
+          </SafeUrlAdmin>
+        ),
       },
     ],
   },
