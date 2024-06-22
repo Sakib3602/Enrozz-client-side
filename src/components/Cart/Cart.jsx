@@ -6,6 +6,7 @@ import useAxiosPublic from "../Hook/useAxiosPublic";
 import Loader from "../Loader/Loader";
 import offer from "../../assets/60_-off-web.png";
 import CartSlider from "./CartSlider";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { person } = useContext(AuthContext);
@@ -20,17 +21,13 @@ const Cart = () => {
   });
 
   console.log(data, "tabel");
- 
 
   const val = data?.reduce((accumulator, currentValue) => {
     return parseInt(accumulator + currentValue?.price);
-  }, 0)
+  }, 0);
 
-  const valTotal = val + 50 +18
+  const valTotal = val + 50 + 18;
 
-
- 
-  
   if (isLoading) {
     return <Loader></Loader>;
   }
@@ -55,22 +52,12 @@ const Cart = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {/* {
 
-                
-data?.length > 0 &&
-  
-              data?.map((t) => (
-                <Table refetch={refetch} key={t?._id} t={t}></Table>
-              ))} */}
-
-              {
-                data?.length > 0 ?  data?.map((t) => (
-                  <Table refetch={refetch} key={t?._id} t={t}></Table>
-                )) : ""
-              }
-
-
+              {data?.length > 0
+                ? data?.map((t) => (
+                    <Table refetch={refetch} key={t?._id} t={t}></Table>
+                  ))
+                : ""}
 
               {/* row 2 */}
             </tbody>
@@ -92,14 +79,21 @@ data?.length > 0 &&
 
         <div className="flex justify-between px-8 text-[18px] font-[600] mb-5">
           <h1>Total Price</h1>
-          <h1>
-            ${valTotal}
-            {/* {data?.reduce((accumulator, currentValue) => {
-              return parseInt(accumulator + currentValue?.price);
-            }, 0)}  */}
-          </h1>
-         
+          <h1>${valTotal}</h1>
+
+          {/*  */}
+
+          {/*  */}
         </div>
+        <Link to={'/buyform'}>
+
+        <button className="overflow-hidden mb-10 relative w-full p-2 h-12 bg-black text-white border-none rounded-md text-xl font-bold cursor-pointer relative z-10 group">
+          Buy Now
+          
+        </button>
+        
+        </Link>
+       
 
         {/* table */}
       </div>

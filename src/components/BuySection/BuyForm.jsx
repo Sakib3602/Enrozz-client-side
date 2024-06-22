@@ -2,10 +2,15 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../Hook/useAxiosSecure";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const BuyForm = () => {
 
     const axisSecure = useAxiosSecure()
+
+    const {state} = useLocation()
+
+    console.log(state,"uselocaton")
  
 
     const {
@@ -17,11 +22,11 @@ const BuyForm = () => {
     
       const onSubmit = async(data) => {
 
-        console.log(data)
+        // console.log(data)
 
         const buyData = {
-            price:1334,
-            product_name : "mandatory",
+            price:state?.price,
+            product_name : state?.title,
             name: data.name,
             email: data.email,
             phone: data.number,

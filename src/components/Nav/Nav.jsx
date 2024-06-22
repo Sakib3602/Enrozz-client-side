@@ -191,7 +191,7 @@ const Nav = () => {
                 <Link to={"/cart"}>
                 <li>
                   <Badge
-                    badgeContent={person ? cartlength?.cartLength : "0"  }
+                    // 
                     className="border ml-1  border-solid boder-[2px] border-[#3E0A30]"
                     color="primary"
                   >

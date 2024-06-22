@@ -28,6 +28,7 @@ const AllDetails = ({ data, isLoading }) => {
     const cartData = {
       color,
       size,
+      
       email: person.email,
       title: data.title,
       image: data.image,
@@ -54,6 +55,16 @@ const AllDetails = ({ data, isLoading }) => {
 
     }
   })
+
+
+
+
+
+  function handleSend(){
+
+    navigate("/buyform", { state: data })
+
+  }
 
 
 
@@ -210,8 +221,8 @@ const AllDetails = ({ data, isLoading }) => {
             />
 
             {
-              person ? <Link to={"/buyform"}>
-              <button
+              person ? <button
+              onClick={handleSend}
   
                 type="button"
                 className="bg-white border border-[#4ADE80] text-center w-48 rounded-2xl h-14 relative font-sans text-black text-xl font-semibold group"
@@ -234,9 +245,7 @@ const AllDetails = ({ data, isLoading }) => {
                   </svg>
                 </div>
                 <p className="translate-x-2">Buy Now</p>
-              </button>
-              
-              </Link> : <Link to={"/joinUs"}>
+              </button> : <Link to={"/joinUs"}>
             <button
 
               type="button"
