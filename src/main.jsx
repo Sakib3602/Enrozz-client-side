@@ -24,6 +24,7 @@ import Fail from "./components/BuySection/Fail";
 import Cancel from "./components/BuySection/Cancel";
 import AllUser from "./components/DashBord/Admin/AllUser";
 import SafeUrlAdmin from "./components/DashBord/Admin/SafeUrlAdmin";
+import Order from "./components/DashBord/Admin/Order";
 
 const router = createBrowserRouter([
   {
@@ -106,23 +107,46 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <UserProfile></UserProfile>,
+        element: (
+          <PrivateRoute>
+            <UserProfile></UserProfile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "updateUserProfile",
-        element: <UpdateProfile></UpdateProfile>,
+        element: (
+          <PrivateRoute>
+            <UpdateProfile></UpdateProfile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "fullReview",
-        element: <FullReview></FullReview>,
+        element: (
+          <PrivateRoute>
+            <FullReview></FullReview>
+          </PrivateRoute>
+        ),
       },
       {
         path: "alluser",
         element: (
-          <SafeUrlAdmin>
-            
-            <AllUser></AllUser>
-          </SafeUrlAdmin>
+          <PrivateRoute>
+            <SafeUrlAdmin>
+              <AllUser></AllUser>
+            </SafeUrlAdmin>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "order",
+        element: (
+          <PrivateRoute>
+            <SafeUrlAdmin>
+             <Order></Order>
+            </SafeUrlAdmin>
+          </PrivateRoute>
         ),
       },
     ],

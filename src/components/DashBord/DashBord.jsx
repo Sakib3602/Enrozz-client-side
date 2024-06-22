@@ -8,6 +8,7 @@ import { MdOutlineRateReview } from "react-icons/md";
 import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import UserSingleData from "../Hook/UserSingleData";
 import { FaUsers } from "react-icons/fa6";
+import { MdOutlineBorderColor } from "react-icons/md";
 const DashBord = () => {
   const [userSingleData, isloading] = UserSingleData();
   return (
@@ -92,6 +93,17 @@ const DashBord = () => {
                 >
                   <FaUsers className="mr-2"></FaUsers>
                   All User
+                </Link>
+              </li>
+               }
+               {
+                userSingleData?.role === "admin" && <li className="mt-10">
+                <Link
+                  className="flex space-y-10 items-center"
+                  to={"order"}
+                >
+                  <MdOutlineBorderColor className="mr-2"></MdOutlineBorderColor>
+                  Order Data
                 </Link>
               </li>
                }
