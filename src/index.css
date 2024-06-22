@@ -509,5 +509,51 @@
   
 
 
+
+  /* order button */
+  .wop {
+    background: #fff;
+    border: none;
+    padding: 5px 10px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    width: 160px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: skew(-21deg);
+    border : 2px solid black
+  }
+  
+  .pow {
+    display: inline-block;
+    transform: skew(21deg);
+  }
+  
+  .wop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    left: 0;
+    background: rgb(20, 20, 20);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.5s;
+  }
+  
+  .wop:hover {
+    color: #fff;
+  }
+  
+  .wop:hover::before {
+    left: 0;
+    right: 0;
+    opacity: 1;
+  }
+  
+  
+  
   
   

@@ -14,7 +14,7 @@ const AllUser = () => {
   return (
     <div>
         <div className="w-full h-[100px] lg:m-10 bg-white selection:m-10 shadow-lg rounded-xl p-8">
-            <h1 className="text-[30px] font-[600]">All Users ({data.length})</h1>
+            <h1 className="text-[30px] font-[600]">All Users ({data?.length})</h1>
 
         </div>
       <div className="overflow-x-auto lg:m-10">
