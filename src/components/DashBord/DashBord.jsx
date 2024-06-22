@@ -9,6 +9,7 @@ import { MdOutlineAdminPanelSettings } from "react-icons/md";
 import UserSingleData from "../Hook/UserSingleData";
 import { FaUsers } from "react-icons/fa6";
 import { MdOutlineBorderColor } from "react-icons/md";
+import { IoStatsChartOutline } from "react-icons/io5";
 const DashBord = () => {
   const [userSingleData, isloading] = UserSingleData();
   return (
@@ -85,6 +86,15 @@ const DashBord = () => {
                   )}
                 </li>
                 {/*  */}
+                <li className="mt-10">
+                  <Link
+                    className="flex space-y-10 items-center"
+                    to={"statics"}
+                  >
+                    <IoStatsChartOutline className="mr-2"></IoStatsChartOutline>
+                    Statics
+                  </Link>
+                </li>
                {
                 userSingleData?.role === "admin" &&  <li className="mt-10">
                 <Link
@@ -117,6 +127,7 @@ const DashBord = () => {
                     UpDate Profile
                   </Link>
                 </li>
+                
 
                 {userSingleData?.role === "guest" && (
                   <li className="mt-10">

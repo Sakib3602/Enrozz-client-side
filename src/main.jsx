@@ -25,6 +25,7 @@ import Cancel from "./components/BuySection/Cancel";
 import AllUser from "./components/DashBord/Admin/AllUser";
 import SafeUrlAdmin from "./components/DashBord/Admin/SafeUrlAdmin";
 import Order from "./components/DashBord/Admin/Order";
+import Statics from "./components/DashBord/Admin/Statics";
 
 const router = createBrowserRouter([
   {
@@ -145,6 +146,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <SafeUrlAdmin>
              <Order></Order>
+            </SafeUrlAdmin>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "statics",
+        element: (
+          <PrivateRoute>
+            <SafeUrlAdmin>
+             <Statics></Statics>
             </SafeUrlAdmin>
           </PrivateRoute>
         ),

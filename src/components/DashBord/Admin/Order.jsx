@@ -8,7 +8,7 @@ const Order = () => {
 
   const [orderTT,setOrderTT] = useState(true)
 
-  const { data: orders = [], isLoading } = useQuery({
+  const { data: orders = [], isLoading,refetch } = useQuery({
     queryKey: ["ordersAll"],
     queryFn: async () => {
       const res = await axiosSecure.get("/ordersAllForAdmin");
@@ -19,7 +19,7 @@ const Order = () => {
   const filterOrderBySuccess = orders.filter((f) => f?.payment === "success");
   const filterOrderByPending = orders.filter((f) => f?.payment === "pending");
 
-    console.log(orderTT,"lkscolsco")
+    console.log(orders,"lkscolsco")
   return (
     <div className="w-[95%] bg-white min-h-screen  m-auto">
       <div className="bg-[#006666] w-[100%] h-[100px] pt-5 m-auto">
@@ -66,6 +66,7 @@ const Order = () => {
             {
                 orderTT ? filterOrderBySuccess?.map((o, i) => (
                     <OrderTable
+                    refetch={refetch}
                       key={o?._id}
                       o={o}
                       i={i}
@@ -73,6 +74,7 @@ const Order = () => {
                     ></OrderTable>
                   )) : filterOrderByPending?.map((o, i) => (
                     <OrderTable
+                    refetch={refetch}
                       key={o?._id}
                       o={o}
                       i={i}
