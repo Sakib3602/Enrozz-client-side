@@ -1,8 +1,45 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# --ENROZZZ--
 
-Currently, two official plugins are available:
+Live Link : https://enrozz.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+------------------------
+
+
+
+
+# --Project Overview--
+
+This project is an online clothing store that allows users to browse, search, and purchase clothing items. It includes user authentication, dynamic cart management, payment processing, and both user and admin dashboards.
+
+# --Features--
+
+- User Authentication: Secure authentication using Firebase.
+- Product Browsing: View and search for clothing items.
+- Dynamic Cart: Add, remove, and update items in the shopping cart.
+- Payment Processing: Integration with SSLCommerz for secure payments.
+- User Dashboard: View order history and manage account details.
+- Admin Dashboard: Manage products, view sales analytics, and handle orders.
+## Technology Stack
+
+
+Frontend:
+
+- React.js
+- React Router DOM
+Backend:
+
+- Node.js
+- Express.js
+Database:
+
+- MongoDB
+Authentication:
+
+- Firebase Authentication
+Payment Gateway:
+
+- SSLCommerz
+
