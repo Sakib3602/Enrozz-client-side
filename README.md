@@ -43,3 +43,21 @@ Payment Gateway:
 
 - SSLCommerz
 
+
+## Installation
+
+Install my-project with npm
+
+```bash
+  git clone https://github.com/Sakib3602/Enrozz-client-side.git
+  cd Enrozz-client-side
+
+```
+Now Install -
+```bash
+  npm install
+
+
+```
+
+
